@@ -22,9 +22,11 @@ db.settings({
 //   .then(docRef => console.log(docRef.id))
 //   .catch(err => console.log(err));
 
-db.collection("users")
-  .doc("new")
-  .onSnapshot(
-    col => console.log("Data now - ", col.data()),
-    err => console.log(err)
-  );
+db.collection("users").onSnapshot(
+  docsSnapshot => {
+    docsSnapshot.forEach(doc => {
+      console.log(doc.data());
+    });
+  },
+  err => console.log(err)
+);
