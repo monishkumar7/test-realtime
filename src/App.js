@@ -1,7 +1,11 @@
 import React, { Component, Fragment } from 'react';
-import { addData } from './store/actions/testActions';
+import { addData, listenChanges, newPage } from './store/actions/testActions';
 import { connect } from 'react-redux';
 class App extends Component {
+  componentDidMount = () => {
+    this.props.onListenChanges();
+  };
+
   state = {
     title: '',
     content: ''
@@ -16,6 +20,10 @@ class App extends Component {
     this.props.onAddData(this.state);
   };
 
+  handleShare = () => {
+    this.props.onNewPage();
+  };
+
   render() {
     return (
       <Fragment>
@@ -28,18 +36,27 @@ class App extends Component {
             <button className="btn">Submit</button>
           </form>
         </div>
+        <button onClick={this.handleShare}>Hello</button>
       </Fragment>
     );
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    newPageId: state.myObject
+  };
+};
+
 const mapDispatchToProps = dispatch => {
   return {
-    onAddData: data => dispatch(addData(data))
+    onAddData: data => dispatch(addData(data)),
+    onListenChanges: () => dispatch(listenChanges()),
+    onNewPage: () => dispatch(newPage())
   };
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(App);

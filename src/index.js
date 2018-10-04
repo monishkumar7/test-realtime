@@ -11,9 +11,11 @@ import registerServiceWorker from './registerServiceWorker';
 import reducer from './store/reducers/reducer';
 import fbConfig from './config/fbConfig';
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 const store = createStore(
   reducer,
-  compose(
+  composeEnhancers(
     applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
     reduxFirestore(fbConfig),
     reduxFirebase(fbConfig)
