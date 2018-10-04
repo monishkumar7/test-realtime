@@ -1,5 +1,6 @@
 const initialState = {
-  myObject: {}
+  myObject: {},
+  shareId: ''
 };
 
 const reducer = (state = initialState, action) => {
@@ -10,10 +11,7 @@ const reducer = (state = initialState, action) => {
     case 'NEW_SHARE':
       return {
         ...state,
-        myObject: {
-          ...state.myObject,
-          doc: action.id
-        }
+        shareId: action.id
       };
     default:
       return state;

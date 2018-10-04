@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { reduxFirestore, getFirestore } from 'redux-firestore';
 import { reduxFirebase, getFirebase } from 'react-redux-firebase';
+import { BrowserRouter } from 'react-router-dom';
 
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
@@ -23,9 +24,11 @@ const store = createStore(
 );
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <BrowserRouter>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </BrowserRouter>,
   document.getElementById('root')
 );
 registerServiceWorker();
